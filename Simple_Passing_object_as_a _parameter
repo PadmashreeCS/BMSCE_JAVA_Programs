@@ -1,0 +1,36 @@
+//  Write a class Point with fields x and y. Create a method in a separate class that takes a Point object as a parameter and calculates its distance from the origin.
+
+import java.util.*;
+import java.lang.*;
+class Point 
+{
+    double x,y;
+    Point(double x,double y)
+    {
+        this.x=x;
+        this.y=y;
+    }
+}
+
+class distance_class 
+{
+    void distance(Point p)
+    {
+        double x=p.x;
+        double y=p.y;
+        double dis = Math.sqrt((x*x)+(y*y));
+        System.out.println("Diatnce from orgin: "+dis);
+    }
+}
+
+
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+	  Point p = new Point(12.0,2.34);
+	  distance_class d = new distance_class();
+	  d.distance(p);
+	}
+}

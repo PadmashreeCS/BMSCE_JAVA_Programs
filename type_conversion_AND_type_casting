@@ -1,4 +1,4 @@
-
+// Print these variables. 2. Create a program to demonstrate type conversion and casting
 public class Main
 {
 	public static void main(String[] args)

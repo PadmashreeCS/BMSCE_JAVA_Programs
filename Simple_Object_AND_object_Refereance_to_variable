@@ -1,0 +1,40 @@
+//Write a program to demonstrate how to declare objects and assign object reference variables (e.g., create two Rectangle objects, then assign one object reference to another).
+
+import java.util.*;
+class Rectangle
+{
+    int length,width;
+    Rectangle(int l, int w)
+    {
+        length=l;
+        width=w;
+    }
+    
+    Rectangle(Rectangle r)
+    {
+        length =r.length+10;
+         width = r.width+10;
+    }
+    
+    int calculateArea()
+    {
+        return length*width;
+    }
+}
+public class Main
+{
+	public static void main(String[] args)
+	{
+	   Rectangle R1 = new Rectangle(12,10);
+	   int R1_area = R1.calculateArea();
+	   System.out.println(" R1 Area: "+R1_area);
+	   
+	   
+	   Rectangle R2 = new Rectangle(5,4);
+	   int R2_area = R2.calculateArea();
+	   System.out.println("R2 Area: "+R2_area);
+	   R2 = R1;
+	   int R2_R1_area = R2.calculateArea();
+	   System.out.println("R2=R1 Area: "+R2_R1_area);
+	}
+}

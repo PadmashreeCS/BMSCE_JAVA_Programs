@@ -1,0 +1,21 @@
+//Write a program to declare an array of 5 integers, initialize it, and then print the sum of its elements.
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args)
+	{
+	    int sum=0;
+		int[] a = new int[5];
+		for(int i=0;i<5;i++)
+		{
+		    System.out.println("Enter num "+(i+1));
+		    Scanner sc =  new Scanner(System.in);
+		    a[i]=sc.nextInt();
+		}
+		for(int i=0;i<5;i++)
+		{
+		    sum = sum + a[i];
+		}
+		 System.out.println("Sum of given number is: "+sum);
+	}
+}

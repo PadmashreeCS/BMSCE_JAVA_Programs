@@ -1,0 +1,17 @@
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+		//type conversion
+		int a=10;
+		double b = a;
+		
+		// type casting
+		float f = 20.2f;
+		int i = (int)f;
+		
+		System.out.println("Type convertion---> A: "+a+" B: "+b);
+		System.out.println("Type casting---> A: "+f+" B: "+i);
+	}
+}

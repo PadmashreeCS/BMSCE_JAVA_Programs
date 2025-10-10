@@ -1,0 +1,24 @@
+//Write a program with a Car class. Include a method startEngine() and use the this keyword inside a constructor to distinguish between instance variables and parameters.
+import java.util.*;
+class car
+{
+    String model;
+    String vechile;
+    car(String model, String vechile)
+    {
+        this.model=model;
+        this.vechile=vechile;
+    }
+    void startEngine()
+    {
+        System.out.println(model+" "+vechile+" is started");
+    }
+}
+public class Main
+{
+	public static void main(String[] args)
+	{
+	   car R = new car("mahindra","car");
+	    R.startEngine();
+	}
+}

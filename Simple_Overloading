@@ -1,0 +1,29 @@
+//Create a class with an overloaded method named getVolume(). One version takes one int argument (for a cube), and another takes three double arguments (for a cuboid)
+
+import java.util.*;
+class cude
+{
+    int s,l,w,h;
+    void getVolume(int s)
+    {
+        this.s=s;
+        System.out.println("Volume of the cude "+s+" is: "+s*s*s);
+    }
+    
+    void getVolume(int l, int w, int h)
+    {
+        this.l=l;
+        this.w=w;
+        this.h=h;
+        System.out.println("Volume of the cude "+l+" "+w+" "+h+" is: "+l*w*h);
+    }
+}
+public class Main
+{
+	public static void main(String[] args)
+	{
+	   cude c = new cude();
+	   c.getVolume(5);
+	   c.getVolume(2,3,4);
+	}
+}

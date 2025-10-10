@@ -1,0 +1,29 @@
+// Write a program that takes input for a user's name (String), age (int), height (double), and a boolean (e.g., isStudent). Print these variables.
+
+
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args)
+	{
+		System.out.println("Enter student details");
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Name: ");
+		String name = sc.next();
+		sc.nextLine();
+		System.out.print("Age: ");
+		int age = sc.nextInt();
+			sc.nextLine();
+		System.out.print("Height: ");
+		double height = sc.nextDouble();
+			sc.nextLine();
+		System.out.print("Is student(true/false): ");
+		boolean isStudent = sc.nextBoolean();
+		
+		System.out.println("Student details: \n Name: " +name+ " Age: "+age+" Height: "+height+
+		" is Student: "+isStudent );
+		
+		
+	}
+}

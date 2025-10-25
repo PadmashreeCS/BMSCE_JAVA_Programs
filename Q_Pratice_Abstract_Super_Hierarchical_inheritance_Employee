@@ -1,0 +1,124 @@
+import java.util.Scanner;
+
+// 1. ABSTRACT CLASS: Employee
+abstract class Employee {
+    // Fields
+    protected int emp_ID;
+    protected String emp_Name;
+    protected double salary; // This will store the calculated final salary
+
+    // Constructor to demonstrate the use of the 'super' keyword
+    public Employee(int id, String name) {
+        // Use of 'super' implicitly calls the Object class constructor,
+        // but here we demonstrate the common use of initializing fields
+        this.emp_ID = id;
+        this.emp_Name = name;
+        this.salary = 0.0; // Initialize salary
+    }
+
+    // Abstract method: Must be overridden by derived classes
+    public abstract void Cal_Salary();
+
+    // Concrete methods to get details (required by the prompt)
+    public void getDetails() {
+        System.out.println("  ID: " + emp_ID);
+        System.out.println("  Name: " + emp_Name);
+        System.out.println("  Final Salary: $" + String.format("%.2f", salary));
+    }
+}
+
+// 2. DERIVED CLASS: Permanent_Emp
+class Permanent_Emp extends Employee {
+    private final double BASIC_PAY = 50000.00;
+    private final double BONUS = 0.10; // 10% bonus
+
+    // Demonstrating use of 'super' to call the base class constructor
+    public Permanent_Emp(int id, String name) {
+        super(id, name);
+    }
+
+    // Concrete method to set details (required by the prompt)
+    // Note: ID and Name are set via the constructor/super.
+    public void setDetails(double basicSalary) {
+        // In a real scenario, this method might update the base salary or specific permanent employee attributes
+    }
+
+    // Overridden method to calculate salary
+    @Override
+    public void Cal_Salary() {
+        // Calculation: Basic Pay + 10% Bonus
+        this.salary = BASIC_PAY + (BASIC_PAY * BONUS);
+        System.out.println("\n[Permanent Employee Salary Calculated]");
+    }
+}
+
+// 3. DERIVED CLASS: Temporary_Emp
+class Temporary_Emp extends Employee {
+    private int hoursWorked;
+    private final double HOURLY_RATE = 50.00;
+
+    // Demonstrating use of 'super' to call the base class constructor
+    public Temporary_Emp(int id, String name) {
+        super(id, name);
+        this.hoursWorked = 0;
+    }
+
+    // Concrete method to set details (required by the prompt)
+    public void setDetails(int hoursWorked) {
+        this.hoursWorked = hoursWorked;
+    }
+
+    // Overridden method to calculate salary
+    @Override
+    public void Cal_Salary() {
+        // Calculation: Hours Worked * Hourly Rate
+        this.salary = hoursWorked * HOURLY_RATE;
+        System.out.println("\n[Temporary Employee Salary Calculated]");
+    }
+}
+
+// 4. MAIN CLASS: Testing and Dynamic Method Dispatch Demonstration
+public class MainClass {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // --- Instance Creation ---
+        // P1 is a reference of type Permanent_Emp
+        Permanent_Emp p1 = new Permanent_Emp(101, "Alice Smith");
+        p1.setDetails(50000.00); // Set details (not strictly needed for this simple calculation)
+
+        // T1 is a reference of type Temporary_Emp
+        Temporary_Emp t1 = new Temporary_Emp(202, "Bob Johnson");
+        System.out.print("Enter hours worked for Bob (Temporary Emp): ");
+        int hours = scanner.nextInt();
+        t1.setDetails(hours);
+
+        // --- Dynamic Method Dispatch Demonstration ---
+        // Declare a reference variable of the base class (Employee)
+        Employee empRef;
+
+        System.out.println("\n==============================================");
+        System.out.println("DYNAMIC METHOD DISPATCH (POLYMORPHISM)");
+        System.out.println("==============================================");
+
+        // 1. Assign Permanent_Emp object to the base class reference
+        empRef = p1;
+        System.out.println("\n-- Processing Permanent Employee --");
+        
+        // At runtime, the Cal_Salary() of Permanent_Emp is called
+        // This is Dynamic Method Dispatch
+        empRef.Cal_Salary(); 
+        empRef.getDetails();
+
+        // 2. Assign Temporary_Emp object to the base class reference
+        empRef = t1;
+        System.out.println("\n-- Processing Temporary Employee --");
+        
+        // At runtime, the Cal_Salary() of Temporary_Emp is called
+        // This is Dynamic Method Dispatch
+        empRef.Cal_Salary();
+        empRef.getDetails();
+
+        scanner.close();
+    }
+}

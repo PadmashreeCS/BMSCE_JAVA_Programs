@@ -1,0 +1,93 @@
+import java.util.Scanner;
+
+// Class definition for Vehicle
+class Vehicle {
+    // Non-static (instance) members
+    private String registration_number;
+    private double price;
+
+    // Static member: shared across ALL Vehicle objects
+    private static int count = 0;
+
+    // Constructor: Used to initialize fields and increment the static count
+    public Vehicle(String regNo, double price) {
+        this.registration_number = regNo;
+        this.price = price;
+        
+        // Increment static count
+        count++;
+        // Display creation message
+        System.out.println("Vehicle " + count + " created.");
+    }
+
+    // Non-static method to set the registration number
+    public void setregno(String regNo) {
+        this.registration_number = regNo;
+    }
+
+    // Non-static method to get the registration number
+    public String getregno() {
+        return registration_number;
+    }
+    
+    // Non-static method to get the price (required for comparison)
+    public double getPrice() {
+        return price;
+    }
+
+    // Static method: Returns the total number of vehicles created
+    public static int getVehiclecount() {
+        return count;
+    }
+
+    // Method to display the registration number of the vehicle with the highest price
+    public static void displayHighestPriceVehicle(Vehicle[] vehicles) {
+
+        Vehicle highestPriceVehicle = vehicles[0];
+        
+        // Find the vehicle with the maximum price
+        for (int i = 1; i < vehicles.length; i++) {
+            if (vehicles[i].getPrice() > highestPriceVehicle.getPrice()) {
+                highestPriceVehicle = vehicles[i];
+            }
+        }
+
+        System.out.println("\n*** Highest Price Vehicle ***");
+        System.out.println("Registration Number: " + highestPriceVehicle.getregno());
+        System.out.println("Price: $" + String.format("%.2f", highestPriceVehicle.getPrice()));
+    }
+
+// Main class for execution
+public class VehicleGarage {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter the number of vehicles (n) to create: ");
+        int n = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        // Create an array of n Vehicle objects
+        Vehicle[] garage = new Vehicle[n];
+
+        // Read data and create objects
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for Vehicle " + (i + 1) + ":");
+            System.out.print("  Enter Registration Number: ");
+            String regNo = scanner.nextLine();
+            System.out.print("  Enter Price: ");
+            double price = scanner.nextDouble();
+            scanner.nextLine(); // Consume newline
+
+            // Constructor is called, which increments the static count and prints the message
+            garage[i] = new Vehicle(regNo, price);
+        }
+
+        // Display total count using the static method
+        System.out.println("\nTotal Vehicles in the garage (using static method): " + Vehicle.getVehiclecount());
+
+        // Execute the required query
+        Vehicle.displayHighestPriceVehicle(garage);
+
+        scanner.close();
+    }
+}

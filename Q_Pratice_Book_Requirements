@@ -1,0 +1,113 @@
+import java.util.Scanner;
+
+// Class definition for Book with public fields
+class Book {
+    // Making fields public for simplicity, as per common direct problem solutions
+    public int Bookid;
+    public String Bookname;
+    public int No_of_pages;
+    public int Publisherid;
+    public double Price;
+
+    // Constructor
+    public Book(int id, String name, int pages, int pubId, double price) {
+        this.Bookid = id;
+        this.Bookname = name;
+        this.No_of_pages = pages;
+        this.Publisherid = pubId;
+        this.Price = price;
+    }
+}
+
+// Main class to handle the array and operations
+public class SimpleBookProgram {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // 1. Get the number of books (n)
+        System.out.print("Enter the number of books (n) to create: ");
+        int n = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        // Create an array of n Book objects
+        Book[] bookCollection = new Book[n];
+
+        // 2. Read data for each book
+        for (int i = 0; i < n; i++) {
+            System.out.println("\n--- Enter details for Book " + (i + 1) + " ---");
+            
+            System.out.print("Enter Book ID: ");
+            int id = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.print("Enter Book Name: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Enter Number of Pages: ");
+            int pages = scanner.nextInt();
+
+            System.out.print("Enter Publisher ID: ");
+            int pubId = scanner.nextInt();
+
+            System.out.print("Enter Price: ");
+            double price = scanner.nextDouble();
+            
+            bookCollection[i] = new Book(id, name, pages, pubId, price);
+        }
+
+        // --- Execute the required operations ---
+        
+        // i. Name and Id of the book which is the most expensive one
+        findMostExpensiveBook(bookCollection);
+
+        // ii. Name and Id of the books published by a given Publisherid (accept from user)
+        findBooksByPublisherId(bookCollection, scanner);
+
+        scanner.close();
+    }
+    
+    // Method for requirement (i)
+    private static void findMostExpensiveBook(Book[] books) {
+        if (books.length == 0) return;
+
+        Book mostExpensive = books[0];
+        
+        for (int i = 1; i < books.length; i++) {
+            // Accessing Price directly since it's a public field
+            if (books[i].Price > mostExpensive.Price) {
+                mostExpensive = books[i];
+            }
+        }
+
+        System.out.println("\n==================================");
+        System.out.println("i. MOST EXPENSIVE BOOK");
+        System.out.println("Name: **" + mostExpensive.Bookname + "**");
+        System.out.println("ID: " + mostExpensive.Bookid);
+    }
+
+    // Method for requirement (ii)
+    private static void findBooksByPublisherId(Book[] books, Scanner scanner) {
+        if (books.length == 0) return;
+
+        System.out.println("\n==================================");
+        System.out.print("ii. Enter the **Publisher ID** to search for: ");
+        int searchId = scanner.nextInt();
+        
+        boolean found = false;
+        System.out.println("\nBooks published by Publisher ID " + searchId + ":");
+        
+        for (Book book : books) {
+            // Accessing Publisherid directly
+            if (book.Publisherid == searchId) {
+                System.out.println("  - Name: " + book.Bookname + ", ID: " + book.Bookid);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No books found for Publisher ID " + searchId + ".");
+        }
+        System.out.println("==================================");
+    }
+}

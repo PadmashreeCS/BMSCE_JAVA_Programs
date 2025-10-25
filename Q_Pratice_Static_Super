@@ -1,0 +1,54 @@
+
+
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+class Main 
+{
+    public static void main(String[] args) 
+    {
+        super1 su1 = new super1();
+        sub1 nsub1 = new sub1();
+        sub11 nsub11 =  new sub11();
+    }
+}
+
+class super1
+{
+    static
+    {
+        System.out.println("Subper1 created");
+    }
+    super1()
+    {
+        System.out.println("Inside Super1 defult constructor");
+    }
+}
+
+class sub1 extends super1
+{
+    static
+    {
+        System.out.println("Sub1 created");
+    }
+    
+    sub1()
+    {
+        super();
+        System.out.println("Inside Sub1 defult constructor");
+    }
+}
+
+class sub11 extends sub1
+{
+    static
+    {
+       System.out.println("Sub11 created");
+    }
+    
+    sub11()
+    {
+        super();
+        System.out.println("Inside Sub11 defult constructor");
+    }
+}
+

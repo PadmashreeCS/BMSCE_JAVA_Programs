@@ -1,0 +1,76 @@
+// 1. ABSTRACT CLASS: Calculate
+abstract class Calculate {
+    protected double x;
+    protected double y;
+    protected double result;
+
+    // Abstract method: Must be implemented by all derived classes
+    public abstract void calc();
+
+    // Utility method to set values
+    public void setValues(double valX, double valY) {
+        this.x = valX;
+        this.y = valY;
+    }
+
+    // Utility method to get result
+    public double getResult() {
+        return result;
+    }
+}
+
+// 2. DERIVED CLASS: Adder
+class Adder extends Calculate {
+    @Override
+    public void calc() {
+        result = x + y; // Addition
+        System.out.println("Addition Result: " + result);
+    }
+}
+
+// 3. DERIVED CLASS: Multiplier
+class Multiplier extends Calculate {
+    @Override
+    public void calc() {
+        result = x * y; // Multiplication
+        System.out.println("Multiplication Result: " + result);
+    }
+}
+
+// 4. DERIVED CLASS: Divider
+class Divider extends Calculate {
+    @Override
+    public void calc() {
+        if (y != 0) {
+            result = x / y; // Division
+            System.out.println("Division Result: " + result);
+        } else {
+            System.out.println("Error: Division by zero.");
+            result = Double.NaN;
+        }
+    }
+}
+
+// Main class to test the hierarchy
+public class AbstractCalculatorDemo {
+    public static void main(String[] args) {
+        
+        // Polymorphism: Base class reference pointing to derived class objects
+        Calculate c1, c2, c3;
+        
+        // Addition
+        c1 = new Adder();
+        c1.setValues(25.5, 10.0);
+        c1.calc(); // Calls Adder's calc()
+        
+        // Multiplication
+        c2 = new Multiplier();
+        c2.setValues(5.0, 4.0);
+        c2.calc(); // Calls Multiplier's calc()
+
+        // Division
+        c3 = new Divider();
+        c3.setValues(100.0, 3.0);
+        c3.calc(); // Calls Divider's calc()
+    }
+}

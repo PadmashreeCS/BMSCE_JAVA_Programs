@@ -97,7 +97,7 @@ public class SimpleBookProgram {
         boolean found = false;
         System.out.println("\nBooks published by Publisher ID " + searchId + ":");
         
-        for (Book book : books) {
+        for (Book book : books) { // (datatype variable_name : arraylist)
             // Accessing Publisherid directly
             if (book.Publisherid == searchId) {
                 System.out.println("  - Name: " + book.Bookname + ", ID: " + book.Bookid);

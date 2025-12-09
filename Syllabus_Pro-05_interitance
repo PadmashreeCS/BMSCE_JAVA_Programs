@@ -1,0 +1,134 @@
+import java.util.*;
+
+class Account {
+    String customerName;
+    int accountNumber;
+    String accountType;
+    double balance;
+
+    Scanner sc = new Scanner(System.in);
+
+    // Accept common account details
+    void getAccountDetails() {
+        System.out.print("Enter Customer Name: ");
+        customerName = sc.nextLine();
+
+        System.out.print("Enter Account Number: ");
+        accountNumber = sc.nextInt();
+
+        System.out.print("Enter Initial Balance: ");
+        balance = sc.nextDouble();
+        sc.nextLine(); // Clear buffer
+    }
+
+    // Deposit
+    void deposit() {
+        System.out.print("Enter amount to deposit: ");
+        double amt = sc.nextDouble();
+        balance += amt;
+        System.out.println("Amount deposited successfully.");
+    }
+
+    // Display balance
+    void displayBalance() {
+        System.out.println("Account Holder: " + customerName);
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Balance: " + balance);
+    }
+}
+
+// ---------------- SAVINGS ACCOUNT ----------------
+
+class Sav_acct extends Account {
+
+    // Compute and add compound interest
+    void computeInterest() {
+        double rate = 5;     // 5% interest
+        double n = 1;        // compounding yearly
+        double t = 1;        // 1 year
+
+        double CI = balance * (Math.pow((1 + (rate / 100) / n), n * t) - 1);
+        balance += CI;
+
+        System.out.println("Interest deposited: " + CI);
+    }
+
+    // Withdrawal allowed
+    void withdraw() {
+        System.out.print("Enter amount to withdraw: ");
+        double amt = sc.nextDouble();
+
+        if (amt > balance) {
+            System.out.println("Insufficient Balance!");
+        } else {
+            balance -= amt;
+            System.out.println("Withdrawal Successful.");
+        }
+    }
+}
+
+// ---------------- CURRENT ACCOUNT ----------------
+
+class Cur_acct extends Account {
+
+    double minimumBalance = 500;
+    double penalty = 50;
+
+    // Check minimum balance and impose penalty
+    void checkPenalty() {
+        if (balance < minimumBalance) {
+            balance -= penalty;
+            System.out.println("Penalty of " + penalty + " imposed for low balance.");
+        }
+    }
+
+    // Withdrawal with minimum balance check
+    void withdraw() {
+        System.out.print("Enter amount to withdraw: ");
+        double amt = sc.nextDouble();
+
+        if (amt > balance) {
+            System.out.println("Insufficient Balance!");
+        } else {
+            balance -= amt;
+            checkPenalty();
+            System.out.println("Withdrawal Successful.");
+        }
+    }
+
+    // No interest for current account
+}
+
+// ---------------- MAIN PROGRAM ----------------
+
+class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("1. Savings Account");
+        System.out.println("2. Current Account");
+        System.out.print("Choose Account Type: ");
+        int choice = sc.nextInt();
+        sc.nextLine(); // clear buffer
+
+        if (choice == 1) {
+            Sav_acct sa = new Sav_acct();
+            sa.getAccountDetails();
+            sa.deposit();
+            sa.computeInterest();
+            sa.withdraw();
+            sa.displayBalance();
+        } 
+        else if (choice == 2) {
+            Cur_acct ca = new Cur_acct();
+            ca.getAccountDetails();
+            ca.deposit();
+            ca.withdraw();
+            ca.displayBalance();
+        } 
+        else {
+            System.out.println("Invalid choice.");
+        }
+    }
+}

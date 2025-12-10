@@ -1,0 +1,73 @@
+import java.util.*;
+
+class WrongAge extends Exception 
+{
+    WrongAge(String msg) 
+    {
+        super(msg);
+    }
+}
+
+class Father 
+{
+    int fatherAge;
+
+    Father(int age) throws WrongAge 
+    {
+        if (age < 0) 
+        {
+            throw new WrongAge("Father's age cannot be negative!");
+        }
+        fatherAge = age;
+    }
+}
+
+
+class Son extends Father 
+{
+    int sonAge;
+
+    Son(int father_age, int son_age) throws WrongAge 
+    {
+        super(father_age);  
+
+        if (son_age < 0)
+        {
+            throw new WrongAge("Son's age cannot be negative!");
+        }
+
+        if (son_age >= father_age)
+        {
+            throw new WrongAge("Son's age cannot be greater than or equal to father's age!");
+        }
+
+        sonAge = son_age;
+    }
+}
+
+
+class Main 
+{
+    public static void main(String[] args) 
+    {
+
+        try 
+        {
+            Son s = new Son(40, 20);  
+            System.out.println("Object created successfully.");
+        } 
+        catch (WrongAge e) 
+        {
+            System.out.println("Exception: " + e.getMessage());
+        }
+
+        try 
+        {
+            Son s2 = new Son(30, 35);   
+        } 
+        catch (WrongAge e) 
+        {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}

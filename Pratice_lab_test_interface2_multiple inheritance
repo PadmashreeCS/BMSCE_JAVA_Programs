@@ -1,0 +1,67 @@
+// Write a Java program to demonstrate how interfaces support multiple inheritance using a Student application.
+
+// note: no need to extend or creating personal_class(if your implemting mutiple inheritance class, it is not compersory to extend class)
+
+class Main 
+{
+    public static void main(String[] args) 
+    {
+        
+        student_marks st = new student_marks(10,20,"Padma",12,"CSE");
+         st.st_per_display();
+        st.st_marks_display();
+        
+    }
+}
+
+interface in_personal
+{
+   void st_per_display();
+}
+
+interface in_exam
+{
+    void st_marks_display();
+}
+
+class student_personal
+{
+    String name;
+    int roll_no;
+    String department;
+    student_personal()
+    {
+        
+    }
+    student_personal(String name, int roll_no, String deperment)
+    {
+        this.name = name;
+        this.roll_no = roll_no;
+        this.department = deperment;
+    }
+    
+    public void st_per_display()
+    {
+        System.out.println("Name: "+name+"Roll_no: "+roll_no+"department: "+department);
+    }
+}
+
+class student_marks extends student_personal implements in_exam,in_personal
+{
+    int cie1;
+    int cie2;
+    student_marks()
+    {
+        
+    }
+    student_marks(int cie1, int cie2,String name, int roll_no, String deperment)
+    {
+        super(name,roll_no,deperment);
+        this.cie1 = cie1;
+        this.cie2=cie2;
+    }
+    public void st_marks_display()
+    {
+        System.out.println("Result: "+ (cie1+cie2));
+    }
+}

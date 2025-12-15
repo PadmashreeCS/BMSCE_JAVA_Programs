@@ -1,0 +1,49 @@
+//Write a Java program to illustrate the use of an interface in a Student application.
+//Create an interface named StudentRules with methods to calculate attendance percentage and internal marks.
+
+class Main 
+{
+    public static void main(String[] args) 
+    {
+        studentrule s1 = new student();
+        s1.attendence_percentage(30);
+        s1.internal_marks(39,40,40);
+    }
+}
+
+interface studentrule
+{
+    int day = 150;
+    public void attendence_percentage(int attended);
+    public void internal_marks(int cie1, int cie2, int cie3);
+}
+
+class student implements studentrule
+{
+    public void attendence_percentage(int attended)
+    {
+        int per_att = (attended*100)/studentrule.day;
+        System.out.println("Attendence is: "+per_att);
+    }
+    
+    public void internal_marks(int cie1, int cie2, int cie3)
+    {
+        int f_h_marks=0;
+        if(cie1<=cie2 && cie1<=cie3)
+        {
+            f_h_marks = cie2 + cie3;
+        }
+            if(cie2<=cie1 && cie2<=cie3)
+            {
+                f_h_marks = cie1+cie3;
+            }
+        if(cie3<=cie1 && cie3<=cie2)
+        {
+            f_h_marks = cie1+cie2;
+        }
+        
+        System.out.println("Internal marks is:"+f_h_marks);
+        
+    }
+}
+

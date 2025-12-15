@@ -1,0 +1,52 @@
+// Write a Java program to demonstrate method overriding using a Student and Result class.
+class Main
+{
+    public static void main(String[] args)
+    {
+        System.out.println("--- Method Overriding Demonstration ---");
+        Student student1 = new Student("Alice", 101);
+        System.out.print("\nReference Type: Student (Superclass) -> ");
+        student1.displayInfo();
+        Result result1 = new Result("Bob", 102, 95.5);
+        System.out.print("\nReference Type: Result (Subclass) -> ");
+        result1.displayInfo();
+        Student studentPoly = new Result("Charlie", 103, 88.0);
+        System.out.print("\nReference Type: Student (Polymorphic) -> ");
+        studentPoly.displayInfo();
+    }
+}
+
+class Student
+{
+    String name;
+    int rollNumber;
+
+    public Student(String name, int rollNumber)
+    {
+        this.name = name;
+        this.rollNumber = rollNumber;
+    }
+    public void displayInfo()
+    {
+        System.out.println("Student: " + name + ", Roll No: " + rollNumber);
+    }
+}
+
+
+class Result extends Student
+{
+    double percentage;
+
+    public Result(String name, int rollNumber, double percentage)
+    {
+        super(name, rollNumber);
+        this.percentage = percentage;
+    }
+
+    @Override
+    public void displayInfo()
+    {
+        super.displayInfo();
+        System.out.println("Result: " + percentage + "%");
+    }
+}

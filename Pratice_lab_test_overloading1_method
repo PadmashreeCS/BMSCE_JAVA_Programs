@@ -1,0 +1,45 @@
+// Write a Java program to demonstrate method overloading by calculating the total marks of a student using different numbers of subjects.
+
+class Main 
+{
+    public static void main(String[] args) 
+    {
+        
+        student_marks st1 = new student_marks();
+        student_marks st2 = new student_marks();
+        st1.stu_marks(10,10);
+        st2.stu_marks(10);
+        st1.display();
+        st2.display();
+    }
+}
+
+class student_marks
+{
+    int ds_mark;
+    int java_mark;
+    int ld;
+    int result;
+    student_marks()
+    {
+        
+    }
+    void stu_marks(int ds_mark, int java_marks)
+    {
+        this.ds_mark = ds_mark;
+        this.java_mark = java_marks;
+        result = ds_mark+java_mark;
+    }
+    
+    void stu_marks(int ld)
+    {
+        this.ld = ld;
+        result = ld;
+    }
+    
+   void  display()
+    {
+        System.out.println("Result: "+result);
+    }
+}
+

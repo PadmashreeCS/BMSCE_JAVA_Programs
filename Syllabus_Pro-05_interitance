@@ -132,3 +132,112 @@ class Main {
         }
     }
 }
+
+
+**************************************************************************************************************************************************
+
+import java.util.Scanner;
+
+// Main class
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Create Savings Account
+        System.out.println("Enter initial balance for Savings Account: ");
+        int savBal = sc.nextInt();
+        Sav_acct sa = new Sav_acct("Ravi", 101, "Savings", savBal);
+
+        sa.deposit(5000);
+        sa.displayBalance();
+        sa.withdrawal(2000);
+        sa.computeCompoundInterest(10, 2); // rate=10%, time=2 years
+        sa.displayBalance();
+
+        System.out.println("\n--- Current Account ---");
+
+        // Create Current Account
+        System.out.println("Enter initial balance for Current Account: ");
+        int curBal = sc.nextInt();
+        Cur_acct ca = new Cur_acct("Anu", 102, "Current", curBal);
+
+        ca.deposit(3000);
+        ca.displayBalance();
+        ca.withdrawal(5000);
+        ca.displayBalance();
+    }
+}
+
+// Base Account class
+class Account {
+    String cus_name;
+    int acc_num;
+    String type_acc;
+    int balance;
+
+    Account(String cus_name, int acc_num, String type_acc, int balance) {
+        this.cus_name = cus_name;
+        this.acc_num = acc_num;
+        this.type_acc = type_acc;
+        this.balance = balance;
+    }
+
+    void deposit(int amount) {
+        balance += amount;
+    }
+
+    void displayBalance() {
+        System.out.println("Balance: ₹" + balance);
+    }
+}
+
+// Current Account
+class Cur_acct extends Account {
+    int minBalance = 1000;
+    int serviceCharge = 200;
+
+    Cur_acct(String name, int acc_num, String type, int balance) {
+        super(name, acc_num, type, balance);
+    }
+
+    void withdrawal(int amount) {
+        if (amount > balance) {
+            System.out.println("Insufficient balance!");
+            return;
+        }
+
+        balance -= amount;
+        System.out.println("Balance after withdrawal: ₹" + balance);
+
+        if (balance < minBalance) {
+            balance -= serviceCharge;
+            System.out.println("Service charge of ₹" + serviceCharge + " imposed for falling below minimum balance");
+        }
+    }
+}
+
+// Savings Account
+class Sav_acct extends Account {
+
+    Sav_acct(String name, int acc_num, String type, int balance) {
+        super(name, acc_num, type, balance);
+    }
+
+    void withdrawal(int amount) {
+        if (amount > balance) {
+            System.out.println("Insufficient balance!");
+            return;
+        }
+
+        balance -= amount;
+        System.out.println("Balance after withdrawal: ₹" + balance);
+    }
+
+    void computeCompoundInterest(double rate, int time) {
+        double amount = balance * Math.pow(1 + rate / 100, time);
+        double ci = amount - balance;
+        balance += ci; // add interest to balance
+        System.out.println("Compound interest ₹" + ci + " credited to account");
+    }
+}
+

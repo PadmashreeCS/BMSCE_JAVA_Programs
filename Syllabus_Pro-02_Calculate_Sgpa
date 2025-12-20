@@ -1,8 +1,8 @@
 import java.util.*;
 
-class Main 
+class Main
 {
-    public static void main(String[] args) 
+    public static void main(String[] args)
     {
         Student st = new Student();
         st.accept();
@@ -11,14 +11,14 @@ class Main
     }
 }
 
-class Student 
+class Student
 {
     int no_subjects;
     int[] credit;
     int[] marks;
-    double totalCreditMarks = 0;
-    double totalCredits = 0;
-    double sgpa = 0;
+    double totalCreditMarks;
+    double totalCredits;
+    double sgpa;
 
     Scanner sc = new Scanner(System.in);
 
@@ -30,36 +30,39 @@ class Student
         credit = new int[no_subjects];
         marks = new int[no_subjects];
 
-        for(int i = 0; i < no_subjects; i++)
+        for (int i = 0; i < no_subjects; i++)
         {
-            System.out.print("Enter credits of subject " + (i+1) + ": ");
+            System.out.print("Enter credits of subject " + (i + 1) + ": ");
             credit[i] = sc.nextInt();
         }
 
-        System.out.println("************************");
+        System.out.println("---------------------");
 
-        for(int i = 0; i < no_subjects; i++)
+        for (int i = 0; i < no_subjects; i++)
         {
-            System.out.print("Enter marks of subject " + (i+1) + ": ");
+            System.out.print("Enter marks of subject " + (i + 1) + ": ");
             marks[i] = sc.nextInt();
         }
     }
 
     int grade_return(int m)
     {
-        if(m >= 90 && m <= 100) return 10;
-        else if(m >= 80 && m <= 89) return 9;
-        else if(m >= 70 && m <= 79) return 8;
-        else if(m >= 60 && m <= 69) return 7;
-        else if(m >= 50 && m <= 59) return 6;
-        else if(m >= 45 && m <= 49) return 5;
-        else if(m >= 40 && m <= 44) return 4;
+        if (m >= 90 && m <= 100) return 10;
+        else if (m >= 80) return 9;
+        else if (m >= 70) return 8;
+        else if (m >= 60) return 7;
+        else if (m >= 50) return 6;
+        else if (m >= 45) return 5;
+        else if (m >= 40) return 4;
         else return 0;
     }
 
     void sgpa_calculate()
     {
-        for(int i = 0; i < no_subjects; i++)
+        totalCreditMarks = 0;
+        totalCredits = 0;
+
+        for (int i = 0; i < no_subjects; i++)
         {
             int gp = grade_return(marks[i]);
             totalCreditMarks += credit[i] * gp;
@@ -67,11 +70,10 @@ class Student
         }
 
         sgpa = totalCreditMarks / totalCredits;
-        
     }
-    
+
     void display()
     {
-        System.out.println("SGPA: " + sgpa);
+        System.out.printf("SGPA: %.2f", sgpa);
     }
 }
